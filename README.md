@@ -1,4 +1,4 @@
 djazator
 ========
 
-django server push messages through zeromq, tornado and tornado-sockjs
+django plugin for easy to setup push messages through zeromq, tornado and tornado-sockjs. Under development.
