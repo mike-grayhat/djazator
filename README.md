@@ -1,13 +1,13 @@
 djazator
 ========
 
-`djazator` is a simple django plugin for sending push messages from django server to sockjs clients. It internally uses `zeromq` & [sockjs-tornado](https://github.com/mrjoes/sockjs-tornado). djazator can send push notifications to all sockjs clients and to subset of this clients.
+[djazator](https://github.com/mike-grayhat/djazator) is a simple django plugin for sending push messages from django server to sockjs clients. It internally uses [zeromq](http://www.zeromq.org/) and [sockjs-tornado](https://github.com/mrjoes/sockjs-tornado). djazator can send push notifications to all sockjs clients and to subset of this clients.
 
 ##Requirements:
 
-1. pyzmq>=2.0
-2. sockjs-tornado>=0.0.5
-3. django==1.4
+1. [pyzmq](https://github.com/zeromq/pyzmq)>=2.0
+2. [sockjs-tornado](https://github.com/mrjoes/sockjs-tornado)>=0.0.5
+3. [django](https://www.djangoproject.com/)>=1.4
 
 ##Installation:
 
@@ -89,3 +89,7 @@ To get this messages you need to subscribe by token
 ## Limitations:
 
 Now djazator supports only one tornado instance. I'm planning to implement multiple tornado instances through zeromq dealer/poller in future versions.
+
+## Production:
+
+1. [Hipache](https://github.com/dotcloud/hipache)
