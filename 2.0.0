@@ -1,0 +1,19 @@
+Exception:
+Traceback (most recent call last):
+  File "/home/mike/.virtualenvs/djazator/local/lib/python2.7/site-packages/pip-1.1-py2.7.egg/pip/basecommand.py", line 104, in main
+    status = self.run(options, args)
+  File "/home/mike/.virtualenvs/djazator/local/lib/python2.7/site-packages/pip-1.1-py2.7.egg/pip/commands/install.py", line 214, in run
+    InstallRequirement.from_line(name, None))
+  File "/home/mike/.virtualenvs/djazator/local/lib/python2.7/site-packages/pip-1.1-py2.7.egg/pip/req.py", line 107, in from_line
+    return cls(req, comes_from, url=url)
+  File "/home/mike/.virtualenvs/djazator/local/lib/python2.7/site-packages/pip-1.1-py2.7.egg/pip/req.py", line 40, in __init__
+    req = pkg_resources.Requirement.parse(req)
+  File "/home/mike/.virtualenvs/djazator/local/lib/python2.7/site-packages/distribute-0.6.24-py2.7.egg/pkg_resources.py", line 2582, in parse
+    reqs = list(parse_requirements(s))
+  File "/home/mike/.virtualenvs/djazator/local/lib/python2.7/site-packages/distribute-0.6.24-py2.7.egg/pkg_resources.py", line 2507, in parse_requirements
+    line, p, specs = scan_list(VERSION,LINE_END,line,p,(1,2),"version spec")
+  File "/home/mike/.virtualenvs/djazator/local/lib/python2.7/site-packages/distribute-0.6.24-py2.7.egg/pkg_resources.py", line 2475, in scan_list
+    raise ValueError("Expected "+item_name+" in",line,"at",line[p:])
+ValueError: ('Expected version spec in', 'pyzmq=', 'at', '=')
+
+Storing complete log in /home/mike/.pip/pip.log

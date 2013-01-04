@@ -1,15 +1,13 @@
 from django import template
-from django.template import Context
-from django.template.loader import get_template
-
-from ..utils import unique_hash
+from django.utils.safestring import mark_safe
+from ..utils import tokenize
 
 register = template.Library()
 
 @register.simple_tag(takes_context=True)
-def realtime_token(context):
-    request = context['request']
+def djazator_token(context):
+    user = context['user']
     try:
-        return unique_hash(request.user)
+        return tokenize(user)
     except:
-        return ''
+        return False

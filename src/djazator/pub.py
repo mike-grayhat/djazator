@@ -4,9 +4,9 @@ import zmq
 import json
 import datetime
 
-from utils import unique_hash as _unique_hash
+from .utils import tokenize
 
-__all__ = ('send_data', 'send_json_data', 'notify', 'broadcast')
+__all__ = ('send_data', 'send_json_data', 'notify', 'notify_all')
 
 ctx = zmq.Context()
 
@@ -20,16 +20,16 @@ def _get_send_json_method():
     if settings.DEBUG:
         def dev(json_data):
             socket = ctx.socket(zmq.PUB)
-            socket.connect(settings.SOCKJS_MQ_SOCKET)
+            socket.connect(settings.DJAZATOR_MQ_SOCKET)
             socket.send(json_data, zmq.NOBLOCK)
             socket.close()
         return dev
     else:
         socket = ctx.socket(zmq.PUB)
-        socket.connect(settings.SOCKJS_MQ_SOCKET)
-        def prod(json_data):
+        socket.connect(settings.DJAZATOR_MQ_SOCKET)
+        def production(json_data):
             socket.send(json_data, zmq.NOBLOCK)
-        return prod
+        return production
 
 send_json_data = _get_send_json_method()
 
@@ -38,14 +38,14 @@ def send_data(data, default_serializer=_dthandler):
     send_json_data(json_data)
 
 def notify(data, recipients=tuple(), serializer=_dthandler, **kw):
-    client_hashes = [_unique_hash(u) for u in recipients]
+    client_hashes = [tokenize(u) for u in recipients]
     msg = {'data': data,
            'name': 'notify',
            'recipients': client_hashes}
     msg.update(**kw)
     send_data(msg, default_serializer=serializer)
 
-def broadcast(data, **kw):
+def notify_all(data, **kw):
     msg = {'data': data,
            'name': 'notify_all',
            }

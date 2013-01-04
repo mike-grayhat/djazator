@@ -13,8 +13,8 @@ class ZeroMQClient(object):
         self.connected = False
         self.socket = None
         self.socket_addr = socket_addr
-        self.clients = set()
-        self.registered_clients = defaultdict(set)
+        self.listeners = set()
+        self.subscribers = defaultdict(set)
 
     def connect(self):
         if self.connected:
@@ -38,30 +38,26 @@ class ZeroMQClient(object):
 
     def notify(self, data, recipients=tuple()):
         for r in recipients:
-            client_id_listeners = self.registered_clients.get(r, [])
-            for conn in client_id_listeners:
+            subscribers_ids = self.subscribers.get(r, [])
+            for conn in subscribers_ids:
                 conn.send(data)
 
     def notify_all(self, data):
-        for c in self.clients:
+        for c in self.listeners:
             c.send(data)
 
-    def notify_listeners(self, event_obj):
-        for listener in self.registered_clients.values():
-            listener.push(event_obj)
+    def add_subscriber(self, client):
+        if client.token:
+            self.subscribers[client.token].add(client)
 
-    def register(self, listener):
-        if listener.client_id:
-            self.registered_clients[listener.client_id].add(listener)
-
-    def add_listener(self, listener):
-        self.clients.add(listener)
-
-    def remove_listener(self, listener):
-        self.clients.remove(listener)
-
-    def unregister(self, listener):
+    def remove_subscriber(self, client):
         try:
-            self.registered_clients[listener.client_id].remove(listener)
+            self.subscribers[client.token].remove(client)
         except KeyError:
             pass
+
+    def add_listener(self, client):
+        self.listeners.add(client)
+
+    def remove_listener(self, client):
+        self.listeners.remove(client)

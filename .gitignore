@@ -2,3 +2,4 @@
 *.pot
 *.pyc
 .idea
+src/djazator.egg-info

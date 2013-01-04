@@ -13,19 +13,21 @@ setup(
     author = "Mike Oskin",
     author_email = "cheap.grayhat@gmail.com",
     description = description,
-    license = "BSD",
+    license = "MIT",
     keywords = "django zeromq tornado sockjs",
     packages = find_packages('src'),
-    package_dir = {'':'src'},   # tell distutils packages are under src
+    package_dir = {'':'src'},
     include_package_data = True,
     package_data = {
         # If any package contains *.txt or *.rst files, include them:
-        '': ['*.txt', '*.rst'],
+        '': ['*.txt', '*.rst', '*.md'],
         },
-    long_description=read('README.rst'),
+    install_requires=['pyzmq>=2.0.0'],
+    long_description=read('README.md'),
     classifiers=[
-        "Development Status :: 1 - Alpha",
+        "Development Status :: 4 - Beta",
         "Topic :: Utilities",
-        "License :: OSI Approved :: BSD License",
+        "License :: OSI Approved :: MIT License",
+        "Framework :: Django"
     ],
 )
