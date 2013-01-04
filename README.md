@@ -1,7 +1,7 @@
 djazator
 ========
 
-djazator is a simple django plugin for sending push messages from django server to sockjs clients. It internally uses zeromq & sockjs-tornado. djazator can send push notifications to all sockjs clients and to subset of this clients.
+`djazator` is a simple django plugin for sending push messages from django server to sockjs clients. It internally uses `zeromq` & [sockjs-tornado](https://github.com/mrjoes/sockjs-tornado). djazator can send push notifications to all sockjs clients and to subset of this clients.
 
 ##Requirements:
 
@@ -11,11 +11,11 @@ djazator is a simple django plugin for sending push messages from django server 
 
 ##Installation:
 
-1. Install djazator with your favorite Python package manager:
+1. Install `djazator` with your favorite Python package manager:
 
         pip install djazator
 
-2. Add djazator to your INSTALLED_APPS in settings.py
+2. Add `djazator` to your INSTALLED_APPS in `settings.py`
 
         INSTALLED_APPS = (
             'django.contrib.auth',
@@ -23,7 +23,7 @@ djazator is a simple django plugin for sending push messages from django server 
             ...
         )
 
-3. define DJAZATOR_MQ_SOCKET in settings.py
+3. define DJAZATOR_MQ_SOCKET in `settings.py`
 
         DJAZATOR_MQ_SOCKET = 'tcp://127.0.0.1:8001'
 
@@ -82,7 +82,7 @@ To get this messages you need to subscribe by token
     conn.emit('subscribe', {'token': token});
     conn.onmessage = function (e){ console.log(e.data); };
 
-{% djazator_token %} is nothing more than a wrapper around djazator.utils.tokenize that only returns user.id . You need to provide your own tokenization function for better security. It should accept django User object and return token. Add path to this function in settings.py .
+`{% djazator_token %}` is nothing more than a wrapper around `djazator.utils.tokenize` that only returns `user.id`. You need to provide your own tokenization function for better security. It should accept django User object and return token. Add path to this function in settings.py .
 
     DJAZATOR_TOKENIZER = 'path.to.my.func'
 
