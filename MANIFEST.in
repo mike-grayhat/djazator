@@ -1,0 +1,6 @@
+include LICENSE-MIT
+include README.md
+include setup.py
+exclude MANIFEST.in
+recursive-include src/djazator/ *
+recursive-exclude * *.pyc
