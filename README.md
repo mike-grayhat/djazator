@@ -52,10 +52,11 @@ djazator is a simple django plugin for sending push messages from django server 
         from djazator.pub import notify_all
         notify_all({'msg': u'Hi all!'})
 
-and you will see it in js console
-        Object {msg: "Hi all!"}
+    and you will see it in js console
 
-## Advanced notifications
+            Object {msg: "Hi all!"}
+
+## Advanced notifications:
 
 You can send notifications to only dedicated users.
 
@@ -85,6 +86,6 @@ To get this messages you need to subscribe by token
 
     DJAZATOR_TOKENIZER = 'path.to.my.func'
 
-## Limitations
+## Limitations:
 
 Now djazator supports only one tornado instance. I'm planning to implement multiple tornado instances through zeromq dealer/poller in future versions.
