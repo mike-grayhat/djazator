@@ -1,6 +1,5 @@
 from django.conf import settings
 from django.utils import importlib
-from django.utils.safestring import mark_safe
 
 def _dumb(user):
     return user.id or "''"
