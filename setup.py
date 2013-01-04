@@ -4,8 +4,8 @@ from setuptools import setup, find_packages
 def read(fname):
     return open(os.path.join(os.path.dirname(__file__), fname)).read()
 
-description = ("django server push messages through zeromq,"
-               " tornado and tornado-sockjs"),
+description = ("simple django plugin for sending push messages"
+               " from django server to sockjs clients"),
 
 setup(
     name = "djazator",
@@ -25,8 +25,6 @@ setup(
     install_requires=['pyzmq>=2.0.0'],
     long_description=read('README.md'),
     classifiers=[
-        "Development Status :: 4 - Beta",
-        "Topic :: Utilities",
         "License :: OSI Approved :: MIT License",
         "Framework :: Django"
     ],
