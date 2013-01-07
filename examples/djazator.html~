@@ -10,10 +10,8 @@
         var token = {% djazator_token %};
         $(function(){
             SockJS.prototype.emit = function (name, data) {
-                var meta_dict = {
-                    name:name,
-                    data:data
-                };
+                var meta_dict = {name:name,
+                    data:data};
                 this.send(JSON.stringify(meta_dict))
             };
         });
@@ -36,7 +34,8 @@
                 el.append('<h3>You are logged in. Try to send notifications throught "djazator.pub.notify" and "djazator.pub.notify_all" .</h3>')
             } else {
                 el.append('<h3>You are not logged in. Try to send notifications throught "djazator.pub.notify_all" ("djazator.pub.notify" can only deliver messages to logged in clients).</h3>')
-            }
+
+        }
         };
     </script>
 </head>

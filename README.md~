@@ -71,7 +71,7 @@ You can send notifications to only dedicated users.
 To get this messages you need to subscribe by token
 
     var token = {% djazator_token %};
-    SockJS.prototype.emit = function (name, data) { // wrapper around SockJS.send for djazator's protocol support
+    SockJS.prototype.emit = function (name, data) {
         var meta_dict = {
             name:name,
             data:data
@@ -88,7 +88,7 @@ To get this messages you need to subscribe by token
 
 ## Limitations:
 
-Now djazator supports only one tornado instance. I'm planning to implement multiple tornado instances through zeromq xpub/xsub in future versions.
+Now djazator supports only one tornado instance. I'm planning to implement multiple tornado instances through zeromq dealer/poller in future versions.
 
 ## Production:
 
