@@ -23,8 +23,8 @@ setup(
         '': ['*.txt', '*.rst', '*.md'],
         },
     entry_points={'console_scripts': [
-                     'djazator_server = djazator.server:main',
-                     'djazator_mq = djazator.mq:main',
+                     'djazator-server = djazator.server:main',
+                     'djazator-mq = djazator.mq:main',
                  ],
     },
     install_requires=['pyzmq>=2.0.0'],
