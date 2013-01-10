@@ -28,7 +28,7 @@ setup(
                  ],
     },
     install_requires=['pyzmq>=2.0.0'],
-    long_description=read('README.md'),
+    long_description=read('README.rst'),
     classifiers=[
         "License :: OSI Approved :: MIT License",
         "Framework :: Django"
