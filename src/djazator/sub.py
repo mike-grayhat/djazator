@@ -20,7 +20,7 @@ class ZeroMQClient(object):
         if self.connected:
             return
         self.socket = ctx.socket(zmq.SUBSCRIBE)
-        self.socket.bind(self.socket_addr)
+        self.socket.connect(self.socket_addr)
         stream = ZMQStream(self.socket, self.io_loop)
         stream.on_recv(self.on_message)
         self.connected = True

@@ -75,7 +75,7 @@ define("address", default='', help="run on the given address", type=str)
 define("mq_socket", type=str, help="socket to bind for django mq notifications")
 define("route", default='/sockjs', type=str)
 
-def _run():
+def main():
     tornado.options.parse_command_line()
     router = SockJSRouter(SockJSConnection,
         options.route,
@@ -88,4 +88,4 @@ def _run():
         pass
 
 if __name__ == '__main__':
-    _run()
+    main()
