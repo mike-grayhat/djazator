@@ -38,7 +38,7 @@ Installation:
 
    ::
 
-       DJAZATOR_MQ_SOCKET = 'tcp://127.0.0.1:8001'
+       DJAZATOR_MQ_SOCKET = 'tcp://127.0.0.1:8002'
 
 Usage:
 ------
@@ -99,9 +99,9 @@ You can send notifications to only dedicated users.
     from djazator.utils import tokenize
     from django.contrib.auth.models import User
     user = User.objects.get(email='djazator@mail.com')
-    notify({'msg': u'Hi, %s!' % user.username}, recipients=[user])
+    notify({'msg': u'Hi, %s!' % user.username}, users=[user])
     token = tokenize(user)
-    notify({'msg': u'Hi user with token %s !' % token}, recipients=[user])
+    notify({'msg': u'Hi user with token %s !' % token}, users=[user])
 
 To get this messages you need to subscribe by token
 
