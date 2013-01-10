@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
+import argparse
 import json
 import tornado
 import sockjs.tornado
 
 from zmq.eventloop import ioloop
-from tornado.options import options, define
 from djazator import sub
 
 ioloop.install()
@@ -13,7 +13,6 @@ io_loop = tornado.ioloop.IOLoop.instance()
 class BaseMsgHandler(object):
     """
     Base SockJS connectiont handler.
-    Provide your own if you need advanced functionality.
     """
 
     def __init__(self, connection):
@@ -70,18 +69,22 @@ class SockJSRouter(sockjs.tornado.SockJSRouter):
         self._connection.mq_sub = sub.ZeroMQClient(self.io_loop, socket_addr=socket_addr)
         self._connection.mq_sub.connect()
 
-define("port", default=8080, help="run on the given port", type=int)
-define("address", default='', help="run on the given address", type=str)
-define("mq_socket", type=str, help="socket to bind for django mq notifications")
-define("route", default='/sockjs', type=str)
-
 def main():
-    tornado.options.parse_command_line()
+    parser = argparse.ArgumentParser()
+    parser.add_argument('-p', '--port', default=8080, type=int, required=True,
+                        help="run on the given port")
+    parser.add_argument('-a', '--address', default='', type=str, required=True,
+                        help="run on the given address")
+    parser.add_argument('-s', '--mq_socket', type=str, required=True,
+                        help="socket to bind for django mq notifications")
+    parser.add_argument('-r', '--route', default='/sockjs', type=str,
+                        help="url route", required=True)
+    args = parser.parse_args()
     router = SockJSRouter(SockJSConnection,
-        options.route,
-        socket_addr=options.mq_socket)
+        args.route,
+        socket_addr=args.mq_socket)
     app = tornado.web.Application(router.urls,)
-    app.listen(options.port, address=options.address)
+    app.listen(args.port, address=args.address)
     try :
         io_loop.start()
     except KeyboardInterrupt:

@@ -3,8 +3,8 @@ import argparse
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument('-s', '--sub', help='sub', type=str, required=True)
-    parser.add_argument('-p', '--pub', help='pub', type=str, required=True)
+    parser.add_argument('-s', '--sub', help='django subscription socket', type=str, required=True)
+    parser.add_argument('-p', '--pub', help='tornado publication socket', type=str, required=True)
     args = parser.parse_args()
 
     ctx = zmq.Context()

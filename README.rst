@@ -6,6 +6,8 @@ django server to sockjs clients. It internally uses `zeromq`_ and
 `sockjs-tornado`_. djazator can send push notifications to all sockjs
 clients and to subset of this clients.
 
+.. image:: http://mike-grayhat.github.com/djazator/architecture.jpg
+
 Requirements:
 -------------
 
@@ -45,9 +47,15 @@ Usage:
 
    ::
 
-       python -m djazator.server --port=8080 --mq_socket=tcp://127.0.0.1:8001 --route=/sockjs --address=''
+       djazator-server --port=8080 --mq_socket=tcp://127.0.0.1:8001 --route=/sockjs --address=''
 
-2. append sockjs client library to your page
+2. run zeromq forward device
+
+   ::
+
+       djazator-mq --sub=tcp://127.0.0.1:8002 --pub=tcp://127.0.0.1:8001
+
+3. append sockjs client library to your page
 
    ::
 
@@ -55,19 +63,19 @@ Usage:
            <script src="http://cdn.sockjs.org/sockjs-0.3.min.js">
            ...
 
-3. open page in browser and connect to sockjs-tornado server
+4. open page in browser and connect to sockjs-tornado server
 
    ::
 
        conn = new SockJS('http://localhost:8080/sockjs')
 
-4. define a callback for incoming messages
+5. define a callback for incoming messages
 
    ::
 
        conn.onmessage = function (e){ console.log(e.data); };
 
-5. send a message from django
+6. send a message from django
 
    ::
 
@@ -121,12 +129,11 @@ settings.py .
 
     DJAZATOR_TOKENIZER = 'path.to.my.func'
 
-Limitations:
+Conclusions:
 ------------
 
-Now djazator supports only one tornado instance. I’m planning to
-implement multiple tornado instances through zeromq xpub/xsub in future
-versions.
+1. djazator serializes datetime objects with ISO 8601 format. You can parse it on client with `moment.js`_ .
+2. djazator server can handle client's messages constructed only in some specific way and can't be used for p2p communications.
 
 Production:
 -----------
@@ -135,6 +142,7 @@ Production:
 
 .. _djazator: https://github.com/mike-grayhat/djazator
 .. _zeromq: http://www.zeromq.org/
+.. _moment.js: http://momentjs.com/
 .. _sockjs-tornado: https://github.com/mrjoes/sockjs-tornado
 .. _pyzmq: https://github.com/zeromq/pyzmq
 .. _django: https://www.djangoproject.com/

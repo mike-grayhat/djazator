@@ -9,7 +9,7 @@ description = ("simple django plugin for sending push messages"
 
 setup(
     name = "djazator",
-    version = "0.1.1",
+    version = "0.2.0",
     author = "Mike Oskin",
     author_email = "cheap.grayhat@gmail.com",
     description = description,
