@@ -1,5 +1,16 @@
-Список изменений
-================
+Changelog
+=========
+
+0.2.2
+-----
+
+* Fixed an issue with presence of closed sockjs-connections in subscribers.
+* Minor fix in djazator.pub methods
+
+0.2.1
+-----
+
+* Fixed MANIFEST.in error & some documentation issues
 
 0.2.0
 -----

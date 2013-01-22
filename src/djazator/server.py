@@ -55,7 +55,7 @@ class SockJSConnection(sockjs.tornado.SockJSConnection):
     def on_close(self):
         self.mq_sub.remove_listener(self)
         if self.token:
-            self.mq_sub.unregister(self)
+            self.mq_sub.remove_subscriber(self)
 
     def on_message(self, message):
         return self.msg_handler(json.loads(message))

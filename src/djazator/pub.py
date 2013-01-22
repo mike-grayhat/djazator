@@ -39,17 +39,15 @@ def send_data(data, default_serializer=_dthandler):
     json_data = json.dumps(data, default=default_serializer)
     send_json_data(json_data)
 
-def notify(data, users=tuple(), serializer=_dthandler, **kw):
+def notify(data, users=tuple(), serializer=_dthandler):
     client_hashes = [tokenize(u) for u in users]
     msg = {'data': data,
            'name': 'notify',
            'recipients': client_hashes}
-    msg.update(**kw)
     send_data(msg, default_serializer=serializer)
 
-def notify_all(data, **kw):
+def notify_all(data):
     msg = {'data': data,
            'name': 'notify_all',
            }
-    msg.update(**kw)
     send_data(msg)
