@@ -131,7 +131,7 @@ Conclusions:
 ------------
 
 1. djazator serializes datetime objects with ISO 8601 format. You can parse it on client with `moment.js`_ .
-2. djazator server can handle client's messages constructed only in some specific way and can't be used for p2p communications.
+2. djazator server can handle client's messages constructed only in some specific way and can't be used for client to client communications.
 
 Production:
 -----------
