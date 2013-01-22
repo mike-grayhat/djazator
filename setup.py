@@ -4,12 +4,12 @@ from setuptools import setup, find_packages
 def read(fname):
     return open(os.path.join(os.path.dirname(__file__), fname)).read()
 
-description = ' '.join(["A simple django plugin for sending push notifications",
-                        "from django server to sockjs clients"])
+description = ("A simple django plugin for sending push notifications"
+               " from django server to sockjs clients")
 
 setup(
     name = "djazator",
-    version = "0.2.0",
+    version = "0.2.1",
     author = "Mike Oskin",
     author_email = "cheap.grayhat@gmail.com",
     description = description,
