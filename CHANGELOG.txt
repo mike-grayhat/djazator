@@ -1,6 +1,11 @@
 Changelog
 =========
 
+0.2.3
+-----
+
+* Single djazator-server support (no need to run djazator-mq)
+
 0.2.2
 -----
 

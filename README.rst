@@ -41,17 +41,24 @@ Define ``DJAZATOR_MQ_SOCKET`` in ``settings.py``
 Usage:
 ------
 
+Run zeromq forwarder device
+
+::
+
+   djazator-mq --sub=tcp://127.0.0.1:8002 --pub=tcp://127.0.0.1:8001
+
 Run sockjs-tornado server
 
 ::
 
    djazator-server --port=8080 --mq_socket=tcp://127.0.0.1:8001 --route=/sockjs --address=''
 
-Run zeromq forwarder device
+
+Alternatively, if you don't need multiple tornado instances support, you can entirely omit djazator-mq and should pass -S/--single argument to djazator-server
 
 ::
 
-   djazator-mq --sub=tcp://127.0.0.1:8002 --pub=tcp://127.0.0.1:8001
+   djazator-server --single --port=8080 --mq_socket=tcp://127.0.0.1:8002 --route=/sockjs --address=''
 
 Append sockjs client library to your page
 

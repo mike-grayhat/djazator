@@ -65,8 +65,11 @@ class SockJSRouter(sockjs.tornado.SockJSRouter):
 
     def __init__(self, *args, **kw):
         socket_addr = kw.pop('socket_addr')
+        single = kw.pop('single', False)
         super(SockJSRouter, self).__init__(*args, **kw)
-        self._connection.mq_sub = sub.ZeroMQClient(self.io_loop, socket_addr=socket_addr)
+        self._connection.mq_sub = sub.ZeroMQClient(self.io_loop,
+                                                   socket_addr=socket_addr,
+                                                   single=single)
         self._connection.mq_sub.connect()
 
 def main():
@@ -79,6 +82,8 @@ def main():
                         help="socket to bind for django mq notifications")
     parser.add_argument('-r', '--route', default='/sockjs', type=str,
                         help="url route", required=True)
+    parser.add_argument('-S', '--single', default=False, type=bool,
+        help="single instance")
     args = parser.parse_args()
     router = SockJSRouter(SockJSConnection,
         args.route,
