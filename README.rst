@@ -16,11 +16,11 @@ Requirements:
 Installation:
 -------------
 
-Install ``djazator`` with your favorite Python package manager:
+Install ``djazator`` and ``sockjs-tornado`` with your favorite Python package manager:
 
 ::
 
-   pip install djazator
+   pip install djazator sockjs-tornado
 
 Add ``djazator`` to your ``INSTALLED_APPS`` in ``settings.py``
 
