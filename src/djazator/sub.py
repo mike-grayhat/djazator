@@ -8,10 +8,11 @@ ctx = zmq.Context()
 
 class ZeroMQClient(object):
 
-    def __init__(self, io_loop, socket_addr):
+    def __init__(self, io_loop, socket_addr, single=False):
         self.io_loop = io_loop
         self.connected = False
         self.socket = None
+        self.single = single
         self.socket_addr = socket_addr
         self.listeners = set()
         self.subscribers = defaultdict(set)
@@ -20,7 +21,10 @@ class ZeroMQClient(object):
         if self.connected:
             return
         self.socket = ctx.socket(zmq.SUBSCRIBE)
-        self.socket.connect(self.socket_addr)
+        if self.single:
+            self.socket.bind(self.socket_addr)
+        else:
+            self.socket.connect(self.socket_addr)
         stream = ZMQStream(self.socket, self.io_loop)
         stream.on_recv(self.on_message)
         self.connected = True

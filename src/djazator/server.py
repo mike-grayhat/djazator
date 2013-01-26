@@ -82,12 +82,13 @@ def main():
                         help="socket to bind for django mq notifications")
     parser.add_argument('-r', '--route', default='/sockjs', type=str,
                         help="url route", required=True)
-    parser.add_argument('-S', '--single', default=False, type=bool,
+    parser.add_argument('-S', '--single', default=False, action='store_true',
         help="single instance")
     args = parser.parse_args()
     router = SockJSRouter(SockJSConnection,
         args.route,
-        socket_addr=args.mq_socket)
+        socket_addr=args.mq_socket,
+        single=args.single)
     app = tornado.web.Application(router.urls,)
     app.listen(args.port, address=args.address)
     try :
