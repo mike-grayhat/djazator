@@ -1,6 +1,7 @@
 import zmq
 import argparse
 
+
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument('-s', '--sub', help='django subscription socket', type=str, required=True)

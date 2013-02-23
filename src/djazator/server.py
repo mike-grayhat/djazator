@@ -16,7 +16,7 @@ class BaseMsgHandler(object):
     """
 
     def __init__(self, connection):
-        self.conn = connection # SockJS connection
+        self.conn = connection  # SockJS connection
 
     def __call__(self, data):
         if not 'name' in data:
@@ -42,7 +42,7 @@ class BaseMsgHandler(object):
 
 class SockJSConnection(sockjs.tornado.SockJSConnection):
 
-    mq_sub = None # should be initialized by router
+    mq_sub = None  # should be initialized by router
 
     def __init__(self, *args, **kw):
         self.token = None
@@ -72,6 +72,7 @@ class SockJSRouter(sockjs.tornado.SockJSRouter):
                                                    single=single)
         self._connection.mq_sub.connect()
 
+
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument('-p', '--port', default=8080, type=int, required=True,
@@ -83,15 +84,16 @@ def main():
     parser.add_argument('-r', '--route', default='/sockjs', type=str,
                         help="url route", required=True)
     parser.add_argument('-S', '--single', default=False, action='store_true',
-        help="single instance")
+                        help="single instance")
     args = parser.parse_args()
-    router = SockJSRouter(SockJSConnection,
+    router = SockJSRouter(
+        SockJSConnection,
         args.route,
         socket_addr=args.mq_socket,
         single=args.single)
     app = tornado.web.Application(router.urls,)
     app.listen(args.port, address=args.address)
-    try :
+    try:
         io_loop.start()
     except KeyboardInterrupt:
         pass

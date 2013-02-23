@@ -6,6 +6,7 @@ from zmq.eventloop.zmqstream import ZMQStream
 
 ctx = zmq.Context()
 
+
 class ZeroMQClient(object):
 
     def __init__(self, io_loop, socket_addr, single=False):
