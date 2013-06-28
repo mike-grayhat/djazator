@@ -16,11 +16,11 @@ Requirements:
 Installation:
 -------------
 
-Install ``djazator`` and ``sockjs-tornado`` with your favorite Python package manager:
+Install ``djazator`` with your favorite Python package manager:
 
 ::
 
-   pip install djazator sockjs-tornado
+   pip install djazator
 
 Add ``djazator`` to your ``INSTALLED_APPS`` in ``settings.py``
 
@@ -96,7 +96,7 @@ and you will see it in js console
 Advanced notifications:
 -----------------------
 
-You can send notifications to only dedicated users.
+You can send notifications to subset of users.
 
 ::
 
@@ -125,10 +125,11 @@ To get this messages you need to subscribe by token
     conn.onmessage = function (e){ console.log(e.data); };
 
 ``{% djazator_token %}`` is nothing more than a wrapper around
-``djazator.utils.tokenize`` that only returns ``user.id``. You need to
-provide your own tokenization function for better security. It should
-accept django User object and return token. Add path to this function in
-settings.py .
+``djazator.utils.tokenize`` that returns user.id signed with
+standart django singing mechanism. You can configure you own salt by setting
+``DJAZATOR_SALT`` in ``settings.py``. If you need more security,
+you can provide your own tokenization function. It should accept django User
+ object and return token. Add path to this function in settings.py .
 
 ::
 
