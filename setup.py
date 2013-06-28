@@ -30,7 +30,8 @@ setup(
         ],
     },
     install_requires=['pyzmq >=2.0.0, <=2.2.0.1',
-                      'sockjs-tornado>=0.5.0, <=1.0.0'],
+                      'sockjs-tornado==1.0.0',
+                      'tornado==2.4.1'],
     long_description=read('README.rst'),
     classifiers=[
         "License :: OSI Approved :: MIT License",
